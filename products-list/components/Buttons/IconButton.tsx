@@ -1,31 +1,37 @@
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Link, Href } from "expo-router";
 
 type IconButtonProps = {
   icon: keyof typeof Ionicons.glyphMap;
   color: string;
+  onClick: () => void;
   size?: number;
-  link: string;
   style?: {};
 };
 
 const IconButton = ({
   icon,
   color,
+  onClick,
   size = 22,
-  link,
   style,
 }: IconButtonProps) => {
+
+  const handlePress = () => {
+    onClick();
+  };
+
   return (
-    <Link href={link} asChild>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handlePress}>
         <View style={[styles.iconButton, style]}>
-          <Ionicons name={icon} size={size} color={color} />
+          <Ionicons
+            name={icon}
+            size={size}
+            color={color}
+          />
         </View>
       </TouchableOpacity>
-    </Link>
   );
 };
 

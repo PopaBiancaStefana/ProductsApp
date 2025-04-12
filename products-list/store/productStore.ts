@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import Product from "../models/Product";
-import Products from "../layout/Products";
 
 interface ProductStore {
   products: Product[];
