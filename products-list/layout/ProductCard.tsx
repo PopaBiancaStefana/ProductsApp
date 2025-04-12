@@ -23,7 +23,7 @@ const ProductCard = ({ product }: ProductsProps) => {
           <Image source={{ uri: product.image }} style={styles.image} />
           <CustomText style={styles.title}>{product.category}</CustomText>
           <CustomText style={styles.text}>{product.title}</CustomText>
-          <CustomText style={styles.text}>${product.price}</CustomText>
+          <CustomText style={styles.title}>${product.price}</CustomText>
         </TouchableOpacity>
       </Link>
 

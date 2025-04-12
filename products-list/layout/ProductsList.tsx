@@ -52,7 +52,7 @@ const ProductsList = ({ searchTerm, showFavorites }: ProductsProps) => {
 const styles = StyleSheet.create({
   productsContainer: {
     backgroundColor: Colors.lightGrey,
-    marginBottom: 250,
+    marginBottom: 400,
   },
   columnWrapperStyle: {
     justifyContent: "space-between",
