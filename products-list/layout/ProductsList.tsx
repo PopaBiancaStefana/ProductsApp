@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 import Colors from "../constants/Colors";
 import { useProductStore } from "../store/productStore";
@@ -17,7 +23,12 @@ const ProductsList = ({ searchTerm, showFavorites }: ProductsProps) => {
   );
 
   if (!products) {
-    return <Text>Loading...</Text>;
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />
+        <Text>Loading products...</Text>
+      </View>
+    );
   }
 
   return (
@@ -28,7 +39,7 @@ const ProductsList = ({ searchTerm, showFavorites }: ProductsProps) => {
         keyExtractor={(item) => item.id}
         scrollEnabled={true}
         numColumns={2}
-        renderItem={({ item }) => <ProductCard item={item} />}
+        renderItem={({ item }) => <ProductCard product={item} />}
         columnWrapperStyle={styles.columnWrapperStyle}
         contentContainerStyle={styles.contentContainerStyle}
       />
@@ -51,6 +62,11 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 500,
     marginBottom: 20,
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

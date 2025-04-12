@@ -3,8 +3,6 @@ import {
   Text,
   View,
   Image,
-  FlatList,
-  ListRenderItem,
   TouchableOpacity,
 } from "react-native";
 import React from "react";
@@ -15,21 +13,21 @@ import Product from "../models/Product";
 import IconButton from "../components/Buttons/IconButton";
 
 type ProductsProps = {
-  item: Product;
+  product: Product;
 };
 
-const ProductCard = ({ item }: ProductsProps) => {
+const ProductCard = ({ product }: ProductsProps) => {
   const { favorites, addFavorite, removeFavorite } = useProductStore();
 
-  const isFavorite = favorites?.some((fav) => fav.id === item.id);
+  const isFavorite = favorites?.some((fav) => fav.id === product.id);
 
   return (
     <View style={styles.product}>
-      <Link href={{ pathname: "/details", params: { id: item.id } }} asChild>
+      <Link href={{ pathname: "/details", params: { id: product.id } }} asChild>
         <TouchableOpacity style={styles.productContent}>
-          <Image source={{ uri: item.image }} style={styles.image} />
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.text}>${item.price}</Text>
+          <Image source={{ uri: product.image }} style={styles.image} />
+          <Text style={styles.title}>{product.title}</Text>
+          <Text style={styles.text}>${product.price}</Text>
         </TouchableOpacity>
       </Link>
 
@@ -38,9 +36,9 @@ const ProductCard = ({ item }: ProductsProps) => {
           icon={isFavorite ? "heart" : "heart-outline"}
           onClick={() => {
             if (isFavorite) {
-              removeFavorite(item.id);
+              removeFavorite(product.id);
             } else {
-              addFavorite(item);
+              addFavorite(product);
             }
           }}
           color={Colors.dark.background}

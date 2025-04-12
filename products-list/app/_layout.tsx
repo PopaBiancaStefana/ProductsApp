@@ -24,7 +24,6 @@ export default function RootLayoutNav() {
       <Stack.Screen
         name="details"
         options={{
-          headerShown: false,
         }}
       />
     </Stack>
