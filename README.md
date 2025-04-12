@@ -67,3 +67,18 @@ products-app/
 │   └── productStore.ts    # Zustand store for products and favorites management
 └──
 ```
+
+
+### Demo
+
+#### Products Page
+<img src="demo/demo1.png" alt="Products Page" width="300"/>
+
+#### Product Details Page
+<img src="demo/demo2.png" alt="Product Details Pa" width="300"/>
+
+#### Favorites
+<img src="demo/demo3.png" alt="Favorites" width="300"/>
+
+#### Search
+<img src="demo/demo4.png" alt="Search" width="300"/>
