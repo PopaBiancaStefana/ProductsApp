@@ -2,31 +2,24 @@ import { View, ScrollView, Text, StyleSheet } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../constants/Colors";
+import Products from "../layout/Products";
 
 const Page = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView>
       <View>
-        <ScrollView>
-          <Text style={styles.header}>List of products</Text>
-        </ScrollView>
+        <Text style={styles.header}>SearchBar</Text>
+        <Products />
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    top: 25,
-    flex: 1,
-    backgroundColor: Colors.lightGrey,
-  },
   header: {
-    fontSize: 18,
+    fontSize: 32,
     fontWeight: "bold",
-    marginTop: 16,
-    marginBottom: 8,
-    paddingHorizontal: 16,
+    margin: 8,
   },
 });
 
