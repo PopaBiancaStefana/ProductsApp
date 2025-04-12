@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
   ActivityIndicator,
@@ -9,6 +8,7 @@ import React from "react";
 import Colors from "../constants/Colors";
 import { useProductStore } from "../store/productStore";
 import ProductCard from "./ProductCard";
+import CustomText from "../components/CustomText";
 
 type ProductsProps = {
   searchTerm: string;
@@ -26,14 +26,16 @@ const ProductsList = ({ searchTerm, showFavorites }: ProductsProps) => {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" />
-        <Text>Loading products...</Text>
+        <CustomText>Loading products...</CustomText>
       </View>
     );
   }
 
   return (
     <View style={styles.productsContainer}>
-      <Text style={styles.text}>{filteredProducts.length} products found</Text>
+      <CustomText style={styles.text}>
+        {filteredProducts.length} products found
+      </CustomText>
       <FlatList
         data={filteredProducts}
         keyExtractor={(item) => String(item.id)}

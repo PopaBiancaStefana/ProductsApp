@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../constants/Colors";
@@ -6,6 +6,7 @@ import ProductsList from "../layout/ProductsList";
 import SearchBar from "../components/SearchBar";
 import { useState } from "react";
 import IconButton from "../components/Buttons/IconButton";
+import CustomText from "../components/CustomText";
 
 const Page = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,7 +20,7 @@ const Page = () => {
           onSearch={(query) => setSearchQuery(query)}
         />
         <View style={styles.headerContainer}>
-          <Text style={styles.header}>Products</Text>
+          <CustomText style={styles.header}>Products</CustomText>
           <IconButton
             icon={showFavorites ? "heart" : "heart-outline"}
             onClick={() => {

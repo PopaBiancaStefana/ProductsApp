@@ -2,7 +2,8 @@
   "expo": {
     "scheme": "app",
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
     "name": "products-list",
     "slug": "products-list"

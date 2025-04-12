@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   ScrollView,
@@ -16,6 +15,7 @@ import { useProductStore } from "../store/productStore";
 import LongButton from "../components/Buttons/LongButton";
 import IconButton from "../components/Buttons/IconButton";
 import Separator from "../components/Separator";
+import CustomText from "../components/CustomText";
 
 const Details = () => {
   const navigation = useNavigation();
@@ -63,7 +63,7 @@ const Details = () => {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" color={Colors.primary} />
-        <Text>Loading product details...</Text>
+        <CustomText>Loading product details...</CustomText>
       </View>
     );
   }
@@ -76,27 +76,27 @@ const Details = () => {
       >
         <Image source={{ uri: product.image }} style={styles.image} />
         <View style={styles.rowContainer}>
-          <Text style={styles.title}>{product.title}</Text>
-          <Text style={styles.title}>${product.price}</Text>
+          <CustomText style={styles.title}>{product.title}</CustomText>
+          <CustomText style={styles.title}>${product.price}</CustomText>
         </View>
         <Separator />
-        <Text
+        <CustomText
           style={styles.description}
           numberOfLines={!textExpanded ? 3 : undefined}
         >
           {product.description}
-        </Text>
+        </CustomText>
         <TouchableOpacity onPress={() => setTextExpanded(!textExpanded)}>
-          <Text style={styles.readMore}>
+          <CustomText style={styles.readMore}>
             {textExpanded ? "Read less" : "Read more"}
-          </Text>
+          </CustomText>
         </TouchableOpacity>
         <Separator />
         <View style={styles.rowContainer}>
-          <Text style={styles.ratingText}>Rating</Text>
-          <Text style={styles.rating}>
+          <CustomText style={styles.ratingText}>Rating</CustomText>
+          <CustomText style={styles.rating}>
             {product.rating.rate} from {product.rating.count} Reviews
-          </Text>
+          </CustomText>
         </View>
       </ScrollView>
       <View style={styles.footer}>

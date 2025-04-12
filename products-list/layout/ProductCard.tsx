@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Colors from "../constants/Colors";
 import { Link } from "expo-router";
 import { useProductStore } from "../store/productStore";
 import Product from "../models/Product";
 import IconButton from "../components/Buttons/IconButton";
+import CustomText from "../components/CustomText";
 
 type ProductsProps = {
   product: Product;
@@ -20,8 +21,9 @@ const ProductCard = ({ product }: ProductsProps) => {
       <Link href={{ pathname: "/details", params: { id: product.id } }} asChild>
         <TouchableOpacity style={styles.productContent}>
           <Image source={{ uri: product.image }} style={styles.image} />
-          <Text style={styles.title}>{product.title}</Text>
-          <Text style={styles.text}>${product.price}</Text>
+          <CustomText style={styles.title}>{product.category}</CustomText>
+          <CustomText style={styles.text}>{product.title}</CustomText>
+          <CustomText style={styles.text}>${product.price}</CustomText>
         </TouchableOpacity>
       </Link>
 

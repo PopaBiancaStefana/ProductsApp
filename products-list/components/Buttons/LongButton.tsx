@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import Colors from "../../constants/Colors";
+import CustomText from "../CustomText";
 
 type LongButtonProps = {
   title: string;
@@ -11,7 +12,7 @@ type LongButtonProps = {
 const LongButton = ({ title, onPress, style }: LongButtonProps) => {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Text style={styles.buttonText}>{title.toUpperCase()}</Text>
+      <CustomText style={styles.buttonText}>{title.toUpperCase()}</CustomText>
     </TouchableOpacity>
   );
 };
