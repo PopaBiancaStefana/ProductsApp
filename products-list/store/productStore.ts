@@ -6,7 +6,7 @@ interface ProductStore {
   favorites: Product[];
   fetchProducts: () => Promise<void>;
   addFavorite: (product: Product) => void;
-  removeFavorite: (productId: string) => void;
+  removeFavorite: (productId: number) => void;
 }
 
 export const useProductStore = create<ProductStore>((set, get) => ({
@@ -36,7 +36,7 @@ export const useProductStore = create<ProductStore>((set, get) => ({
     });
   },
 
-  removeFavorite: (productId: string) => {
+  removeFavorite: (productId: number) => {
     set((state) => ({
       favorites: state.favorites.filter((product) => product.id !== productId),
     }));

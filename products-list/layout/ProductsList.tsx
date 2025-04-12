@@ -36,7 +36,7 @@ const ProductsList = ({ searchTerm, showFavorites }: ProductsProps) => {
       <Text style={styles.text}>{filteredProducts.length} products found</Text>
       <FlatList
         data={filteredProducts}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
         scrollEnabled={true}
         numColumns={2}
         renderItem={({ item }) => <ProductCard product={item} />}

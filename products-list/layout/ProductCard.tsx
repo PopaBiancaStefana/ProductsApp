@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Colors from "../constants/Colors";
 import { Link } from "expo-router";
@@ -19,7 +13,7 @@ type ProductsProps = {
 const ProductCard = ({ product }: ProductsProps) => {
   const { favorites, addFavorite, removeFavorite } = useProductStore();
 
-  const isFavorite = favorites?.some((fav) => fav.id === product.id);
+  const isFavorite = favorites?.some((fav) => fav.id == product.id);
 
   return (
     <View style={styles.product}>

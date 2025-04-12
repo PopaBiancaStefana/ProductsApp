@@ -6,10 +6,11 @@ import {
   ScrollView,
   SafeAreaView,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Colors from "../constants/Colors";
-import { useNavigation, Link } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 import { useProductStore } from "../store/productStore";
 import LongButton from "../components/Buttons/LongButton";
@@ -18,10 +19,16 @@ import Separator from "../components/Separator";
 
 const Details = () => {
   const navigation = useNavigation();
+  const router = useRouter();
   const { id } = useLocalSearchParams();
+  const numberId = Number(id);
   const product = useProductStore((state) =>
-    state.products.find((p) => p.id == id)
+    state.products.find((p) => p.id == numberId)
   );
+  const { favorites, addFavorite, removeFavorite } = useProductStore();
+  const [textExpanded, setTextExpanded] = useState(false);
+
+  const isFavorite = favorites?.some((fav) => fav.id == numberId);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -31,41 +38,59 @@ const Details = () => {
         <IconButton
           icon="arrow-back-outline"
           color={Colors.light.text}
-          onClick={() => {}}
+          onClick={() => router.back()}
           size={30}
         />
       ),
       headerRight: () => (
         <IconButton
-          icon="heart-outline"
+          icon={isFavorite ? "heart" : "heart-outline"}
           color={Colors.light.text}
-          onClick={() => {}}
+          onClick={() => {
+            if (isFavorite) {
+              removeFavorite(numberId);
+            } else if (product) {
+              addFavorite(product);
+            }
+          }}
           size={30}
         />
       ),
     });
-  }, []);
+  }, [isFavorite]);
 
-    if (!product) {
-      return (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color={Colors.primary}/>
-          <Text>Loading product details...</Text>
-        </View>
-      );
-    }
+  if (!product) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+        <Text>Loading product details...</Text>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView>
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainerStyle}
+      >
         <Image source={{ uri: product.image }} style={styles.image} />
         <View style={styles.rowContainer}>
           <Text style={styles.title}>{product.title}</Text>
           <Text style={styles.title}>${product.price}</Text>
         </View>
         <Separator />
-        <Text style={styles.description}>{product.description}</Text>
-        <Text style={styles.readMore}>Read more</Text>
+        <Text
+          style={styles.description}
+          numberOfLines={!textExpanded ? 3 : undefined}
+        >
+          {product.description}
+        </Text>
+        <TouchableOpacity onPress={() => setTextExpanded(!textExpanded)}>
+          <Text style={styles.readMore}>
+            {textExpanded ? "Read less" : "Read more"}
+          </Text>
+        </TouchableOpacity>
         <Separator />
         <View style={styles.rowContainer}>
           <Text style={styles.ratingText}>Rating</Text>
@@ -87,6 +112,9 @@ const styles = StyleSheet.create({
     paddingTop: 70,
     height: "100%",
     backgroundColor: Colors.light.background,
+  },
+  contentContainerStyle: {
+    paddingBottom: 100,
   },
   image: {
     alignSelf: "center",
@@ -113,6 +141,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    flexWrap: "wrap",
   },
   ratingText: {
     fontSize: 16,
